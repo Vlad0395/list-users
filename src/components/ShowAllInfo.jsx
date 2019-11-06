@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Drawer from '@material-ui/core/Drawer';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import withStyles from '@material-ui/core/styles/withStyles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,7 +15,7 @@ import Divider from '@material-ui/core/Divider';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import CreateUser from './CreateUser'
 
 const Styles = theme => ({
     root: {
@@ -132,19 +132,19 @@ class ShowAllInfo extends Component {
                     <Divider />
                     <List>
                         <ListItem button key={100001}>
-                            {/* <Link to="/"> */}
-                            <ListItemText primary=" All Users" />
-                            {/* </Link> */}
+                            <Link to="/">
+                                <ListItemText primary=" All Users" />
+                            </Link>
                         </ListItem>
                         <ListItem button key={100002}>
-                            {/* <Link to="/list"> */}
-                            <ListItemText primary=" List" />
-                            {/* </Link> */}
+                            <Link to="/list">
+                                <ListItemText primary=" List" />
+                            </Link>
                         </ListItem>
 
                     </List>
                     <Divider />
-
+                        <CreateUser />
                 </Drawer>
                 <main
                     className={clsx(classes.content, {
