@@ -16,6 +16,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import CreateUser from './CreateUser'
+import Firebase from 'firebase';
+import config from '../config';
+import map from 'lodash/map'
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import EditUser from './EditUser';
 
 const Styles = theme => ({
     root: {
@@ -75,11 +81,33 @@ const Styles = theme => ({
 const drawerWidth = 240;
 
 class ShowAllInfo extends Component {
-    state = {
-        open: false,
-
+    constructor(props) {
+        super(props);
+        Firebase.initializeApp(config);
     }
 
+    state = {
+        open: false,
+        users: [],
+        editOpen: false,
+        selectedUser: {},
+        selectedUserKey: null,
+    }
+
+    componentDidMount() {
+        let ref = Firebase.database().ref("/");
+        ref.on("value", snapshot => {
+            let users = snapshot.val();
+            // users = Array.isArray(users) ? users : [users]
+            this.setState({ users });
+        });
+    }
+    handleEditShow = (key = null, user = null) => {
+        this.setState({ editOpen: !this.state.editOpen, selectedUser: user, selectedUserKey: key });
+    }
+    handleRemove = (key) =>{
+        Firebase.database().ref(`/${key}`).remove();
+    }
     handleDrawerOpen = () => {
         this.setState({ open: true });
     };
@@ -90,7 +118,9 @@ class ShowAllInfo extends Component {
     render() {
 
         const { classes } = this.props;
-        const { open } = this.state;
+        const { open, users, selectedUser, selectedUserKey } = this.state;
+        console.log('users;', users)
+        console.log('selectedUserKey', selectedUserKey)
         return (
             <Grid className={classes.root}>
                 <CssBaseline />
@@ -144,7 +174,7 @@ class ShowAllInfo extends Component {
 
                     </List>
                     <Divider />
-                        <CreateUser />
+                    <CreateUser />
                 </Drawer>
                 <main
                     className={clsx(classes.content, {
@@ -152,16 +182,38 @@ class ShowAllInfo extends Component {
                     })}
                 >
                     <Grid className={classes.drawerHeader} />
+                    <Grid container align='center' spacing={4}>
+                        <Grid item xs={4}>
+                            First Name
+                        </Grid>
+                        <Grid item xs={4}>
+                            Last Name
+                        </Grid>
+                        <Grid item xs={4}>
+                            Actions
+                        </Grid>
+                    </Grid>
                     <Grid container spacing={4}>
-                        <Grid item xs={4}>
-                            Photo
-                        </Grid>
-                        <Grid item xs={4}>
-                            Name
-                        </Grid>
-                        <Grid item xs={4}>
-                            Age
-                        </Grid>
+                        {map(users, (user, key) => (
+                            <Grid container align='center' >
+                                <Grid item xs={4}>{user.first_name} </Grid>
+                                <Grid item xs={4}>{user.last_name}</Grid>
+                                <Grid item xs={4}>
+                                    <IconButton className={classes.button} aria-label="edit" onClick={() => this.handleEditShow(key, user)}>
+                                        <EditIcon />
+                                    </IconButton>
+                                    <IconButton className={classes.button} aria-label="delete" onClick={() => this.handleRemove(key)}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </Grid>
+                            </Grid>
+                        ))}
+                        {this.state.editOpen && <EditUser
+                            open={this.state.editOpen}
+                            handleClose={this.handleEditShow}
+                            user={selectedUser}
+                            userKey={selectedUserKey}
+                        />}
                     </Grid>
                 </main>
             </Grid>

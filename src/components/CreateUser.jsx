@@ -3,12 +3,14 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
-import CreateUser from '@material-ui/icons/Add'
+import AddUser from '@material-ui/icons/Add'
 import FormUser from './FormUser'
+import Firebase from 'firebase';
+// import config from '../config';
+// import uniqueId from 'lodash/uniqueId'
 function PaperComponent(props) {
     return (
         <Draggable cancel={'[class*="MuiDialogContent-root"]'}>
@@ -17,9 +19,20 @@ function PaperComponent(props) {
     );
 }
 
-class DraggableDialog extends Component {
+class CreateUser extends Component {
+    // constructor(props) {
+    //     super(props);
+    //     // Firebase.initializeApp(config);
+    // };
+
     state = {
         open: false,
+        user: {},
+    }
+    handleChange = (event) => {
+        let user = { ...this.state.user };
+        user[event.target.name] = event.target.value;
+        this.setState({ user });
     }
     handleClickOpen = () => {
         this.setState({ open: true });
@@ -27,12 +40,21 @@ class DraggableDialog extends Component {
     handleClose = () => {
         this.setState({ open: false });
     };
+    writeUserData = () => {
+        let user = { ...this.state.user };
+        // user.id = uniqueId();
+        Firebase.database()
+            .ref("/")
+            .push(user);
+        console.log("DATA SAVED");
+    };
+
     render() {
-        const { open } = this.state;
+        const { open, user } = this.state;
         return (
             <div>
                 <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                    <CreateUser /> Create Contact
+                    <AddUser /> Create User
               </Button>
                 <Dialog
                     open={open}
@@ -44,15 +66,16 @@ class DraggableDialog extends Component {
                         Create User
                 </DialogTitle>
                     <DialogContent>
-                        <DialogContentText>
-                            <FormUser />
-                        </DialogContentText>
+                        <FormUser
+                            user={user}
+                            handleChange={this.handleChange}
+                        />
                     </DialogContent>
                     <DialogActions>
                         <Button autoFocus onClick={this.handleClose} color="primary">
                             Cancel
                   </Button>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.writeUserData} color="primary">
                             Save User
                   </Button>
                     </DialogActions>
@@ -62,4 +85,4 @@ class DraggableDialog extends Component {
     }
 }
 
-export default DraggableDialog
+export default CreateUser

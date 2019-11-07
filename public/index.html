@@ -28,25 +28,26 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   <!-- The core Firebase JS SDK is always required and must be listed first -->
-  <script src="/__/firebase/7.2.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
 
   <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-  <script src="/__/firebase/7.2.3/firebase-analytics.js"></script>
 
-  <!-- Initialize Firebase -->
-  <script src="/__/firebase/init.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyACGN3T9iiDqpwTRGkIcGYiMbY6SeWZ4cs",
+      authDomain: "userslist-1853a.firebaseapp.com",
+      databaseURL: "https://userslist-1853a.firebaseio.com",
+      projectId: "userslist-1853a",
+      storageBucket: "userslist-1853a.appspot.com",
+      messagingSenderId: "21293796002",
+      appId: "1:21293796002:web:190b10799c5d731bf0a5fb"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
 </body>
 
 </html>

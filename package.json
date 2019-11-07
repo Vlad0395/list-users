@@ -5,7 +5,10 @@
   "dependencies": {
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
+    "@types/date-fns": "^2.6.0",
+    "date-fns": "^2.0.0",
     "firebase": "^7.2.3",
+    "lodash": "^4.17.15",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-draggable": "^4.1.0",
