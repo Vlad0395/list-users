@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid'
+import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Avatar from '@material-ui/core/Avatar';
-import CalendarToday from '@material-ui/icons/CalendarToday'
-import Phone from '@material-ui/icons/Phone'
-import Email from '@material-ui/icons/Email'
-// import DateFnsUtils from '@date-io/date-fns';
-// import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import CalendarToday from '@material-ui/icons/CalendarToday';
+import Phone from '@material-ui/icons/Phone';
+import Email from '@material-ui/icons/Email';
 
 const Styles = (theme) => ({
     container: {
@@ -27,27 +25,15 @@ const Styles = (theme) => ({
 });
 
 class FormUser extends Component {
-    // state = {
-    //     first_name: '',
-    //     last_name: '',
-    //     email: '',
-    //     birth_day: '',
-    //     age: '',
-    //     photo_user: '',
-    //     phone_number: '',
-    //     // selectedDate: new Date('2019-08-18T21:11:54'),
-    // }
-    // handleDateChange = (date) => {
-    //     this.setState({ selectedDate: date });
-    // };
-    
+
     render() {
-        const { classes, user } = this.props
-        // const { selectedDate } = this.state
+        const { classes, user } = this.props;
+
         return (
             <Grid container alignItems="center" spacing={4}>
                 <Grid item xs={2}>
-                    <Avatar alt="Remy Sharp" src='' name='photo_user' value={user.photo_user} className={classes.bigAvatar} />
+                    <TextField type="file" ></TextField>
+                    <Avatar alt="Remy Sharp" src='' value={user.photo_user} className={classes.bigAvatar} />
                 </Grid>
                 <Grid item xs={5}>
                     <TextField
@@ -89,23 +75,6 @@ class FormUser extends Component {
                     <CalendarToday />
                 </Grid>
                 <Grid item xs={11}>
-                    {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around">
-                            <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="date-picker-inline"
-                                label="Date picker inline"
-                                value={user.selectedDate}
-                                onChange={this.handleDateChange}
-                                KeyboardButtonProps={{
-                                    'aria-label': 'change date',
-                                }}
-                            />
-                        </Grid>
-                    </MuiPickersUtilsProvider> */}
                     <TextField
                         id="birth_day"
                         label="Birth day"

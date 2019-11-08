@@ -1,19 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import ShowAllInfo from "../components/ShowAllInfo"
-// import List from './components/List'
+import UsersInfo from "../components/UsersInfo";
+import List from '../components/List';
+import Wrapper from '../components/Wrapper';
+
 class Router extends Component {
+    
     render() {
         return (
             <BrowserRouter>
-                < Switch>
-                    <Route path='/'
-                        exact component={ShowAllInfo}
-                    />
-                    <Route path='/list'
-                        // component={List}
-                    />
-                </Switch>
+                <Wrapper>
+                    < Switch>
+                        <Route path='/'
+                            exact component={UsersInfo}
+                        />
+                        <Route path='/list'
+                            component={List}
+                        />
+                    </Switch>
+                </Wrapper>
             </BrowserRouter>
         )
     }
