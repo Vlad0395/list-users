@@ -31,8 +31,9 @@ class FormUser extends Component {
 
         return (
             <Grid container alignItems="center" spacing={4}>
+                <TextField type="file" onChange={(e)=>console.log('file', e.target.files)} ></TextField>
                 <Grid item xs={2}>
-                    <TextField type="file" ></TextField>
+                    
                     <Avatar alt="Remy Sharp" src='' value={user.photo_user} className={classes.bigAvatar} />
                 </Grid>
                 <Grid item xs={5}>
@@ -77,7 +78,8 @@ class FormUser extends Component {
                 <Grid item xs={11}>
                     <TextField
                         id="birth_day"
-                        label="Birth day"
+                        type='date'
+                        // label="Birth day"
                         name='birth_day'
                         className={classes.textField}
                         value={user.birth_day}

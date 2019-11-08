@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import UsersInfo from "../components/UsersInfo";
-import List from '../components/List';
 import Wrapper from '../components/Wrapper';
+import List from '../components/List';
 
 class Router extends Component {
-    
+
     render() {
         return (
             <BrowserRouter>

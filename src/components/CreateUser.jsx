@@ -22,6 +22,7 @@ class CreateUser extends Component {
     state = {
         open: false,
         user: {},
+        src: null,
     };
 
     handleChange = (event) => {
