@@ -108,4 +108,4 @@ export class Wrapper extends Component {
     }
 }
 
-export default (withStyles(Styles, { whithTheme: true })(Wrapper))
+export default (withStyles(Styles, { whithTheme: true })(Wrapper));

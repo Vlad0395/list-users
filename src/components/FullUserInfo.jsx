@@ -13,7 +13,8 @@ import Cake from '@material-ui/icons/Cake';
 import moment from 'moment';
 import Phone from '@material-ui/icons/Phone';
 import Email from '@material-ui/icons/Email';
-import HourglassEmpty from '@material-ui/icons/HourglassEmpty'
+import HourglassEmpty from '@material-ui/icons/HourglassEmpty';
+
 const Styles = (theme) => ({
     root: {
         width: '100%',
@@ -105,4 +106,4 @@ class FullUserInfo extends Component {
     }
 }
 
-export default (withStyles(Styles)(FullUserInfo))
+export default (withStyles(Styles)(FullUserInfo));

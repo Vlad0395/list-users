@@ -85,12 +85,22 @@ class List extends Component {
             <MUIList style={{ marginRight: 10, marginTop: 10 }}>
                 {map(list, (item, i) => (
                     <ListItem key={i}>
-                        <Typography className={classes.textField} >{item.value}</Typography>
+                        <Typography 
+                            className={classes.textField} >{item.value}</Typography>
                         {item.sublist ?
-                            <Button variant="outlined" color="primary" onClick={() => this.handleRemoveSublist(i)}>Remove Sublist</Button>
-                            : <Button variant="outlined" color="primary" onClick={() => this.handleAddSublist(item)}>Add Sublist</Button>
+                            <Button 
+                                variant="outlined" 
+                                color="primary" 
+                                onClick={() => this.handleRemoveSublist(i)}>Remove Sublist</Button>
+                            : <Button 
+                                variant="outlined" 
+                                color="primary" 
+                                onClick={() => this.handleAddSublist(item)}>Add Sublist</Button>
                         }
-                        <Button variant="outlined" color="primary" onClick={() => this.handleRemove(item)}>Remove</Button>
+                        <Button 
+                            variant="outlined" 
+                            color="primary" 
+                            onClick={() => this.handleRemove(item)}>Remove</Button>
                         {item.sublist &&
                             <List
                                 list={item.sublist}
@@ -104,12 +114,18 @@ class List extends Component {
                         }
                     </ListItem>
                 ))}
-                <TextField className={classes.textField} type="text" value={this.state.input} onChange={this.handleInput} />
-                <Button variant="outlined" color="primary" onClick={this.handleAddItem}>Add</Button>
+                <TextField 
+                    className={classes.textField} 
+                    type="text" value={this.state.input} 
+                    onChange={this.handleInput} />
+                <Button 
+                    variant="outlined" 
+                    color="primary" 
+                    onClick={this.handleAddItem}>Add</Button>
             </MUIList>
         );
 
     }
 }
 
-export default (withStyles(Styles)(List))
+export default (withStyles(Styles)(List));

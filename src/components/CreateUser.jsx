@@ -37,11 +37,11 @@ class CreateUser extends Component {
 
     writeUserData = () => {
         let user = { ...this.state.user };
-        // user.id = uniqueId();
         Firebase.database()
             .ref("/")
             .push(user);
     };
+    
     fileSelectedHendler = e => {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
@@ -51,7 +51,6 @@ class CreateUser extends Component {
                 this.setState({ user })
             });
             reader.readAsDataURL(e.target.files[0]);
-            console.log('reader', reader)
         }
     };
 
@@ -89,4 +88,4 @@ class CreateUser extends Component {
     }
 }
 
-export default CreateUser
+export default CreateUser;

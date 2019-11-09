@@ -25,19 +25,16 @@ class UsersInfo extends Component {
         let ref = Firebase.database().ref("/");
         ref.on("value", snapshot => {
             let users = snapshot.val();
-            // users = Array.isArray(users) ? users : [users]
             this.setState({ users });
         });
     }
 
     handleEditShow = (key = null, user = null) => {
         this.setState({ editOpen: !this.state.editOpen, selectedUser: user, selectedUserKey: key });
-        console.log('key', key)
     };
 
     handleRemove = (key) => {
         Firebase.database().ref(`/${key}`).remove();
-        console.log('key', key)
     };
 
     handleCreateShow = () => {
@@ -63,18 +60,6 @@ class UsersInfo extends Component {
                 </Grid>
                 <Grid container>
                     {map(users, (user, key) => (
-                        // <Grid container alignItems="center"  >
-                        //     <Grid item xs={4}>{user.first_name} </Grid>
-                        //     <Grid item xs={4}>{user.last_name}</Grid>
-                        //     <Grid item xs={4}>
-                        //         <IconButton className={classes.button} aria-label="edit" onClick={() => this.handleEditShow(key, user)}>
-                        //             <EditIcon />
-                        //         </IconButton>
-                        //         <IconButton className={classes.button} aria-label="delete" onClick={() => this.handleRemove(key)}>
-                        //             <DeleteIcon />
-                        //         </IconButton>
-                        //     </Grid>
-                        // </Grid>
                         <FullUserInfo 
                             key={key}
                             user={user}

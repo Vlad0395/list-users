@@ -110,7 +110,6 @@ class FormUser extends Component {
                     <TextField
                         id="birth_day"
                         type='date'
-                        // label="Birth day"
                         name='birth_day'
                         className={classes.textField}
                         value={user.birth_day}
@@ -137,4 +136,4 @@ class FormUser extends Component {
     }
 }
 
-export default (withStyles(Styles, { withTheme: true })(FormUser))
+export default (withStyles(Styles, { withTheme: true })(FormUser));

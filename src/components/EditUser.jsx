@@ -41,7 +41,7 @@ class EditUser extends Component {
     };
 
     render() {
-        const { user } = this.state
+        const { user } = this.state;
         const { open, handleClose } = this.props;
 
         return (
@@ -73,4 +73,4 @@ class EditUser extends Component {
     }
 }
 
-export default EditUser
+export default EditUser;
