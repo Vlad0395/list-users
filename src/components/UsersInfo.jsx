@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
-import IconButton from '@material-ui/core/IconButton';
 import map from 'lodash/map';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import EditUser from './EditUser';
 import Styles from '../styles/style';
 import Firebase from 'firebase';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import CreateUser from './CreateUser';
+import FullUserInfo from './FullUserInfo';
 
 class UsersInfo extends Component {
 
@@ -34,10 +32,12 @@ class UsersInfo extends Component {
 
     handleEditShow = (key = null, user = null) => {
         this.setState({ editOpen: !this.state.editOpen, selectedUser: user, selectedUserKey: key });
+        console.log('key', key)
     };
 
     handleRemove = (key) => {
         Firebase.database().ref(`/${key}`).remove();
+        console.log('key', key)
     };
 
     handleCreateShow = () => {
@@ -63,18 +63,25 @@ class UsersInfo extends Component {
                 </Grid>
                 <Grid container>
                     {map(users, (user, key) => (
-                        <Grid container alignItems="center"  >
-                            <Grid item xs={4}>{user.first_name} </Grid>
-                            <Grid item xs={4}>{user.last_name}</Grid>
-                            <Grid item xs={4}>
-                                <IconButton className={classes.button} aria-label="edit" onClick={() => this.handleEditShow(key, user)}>
-                                    <EditIcon />
-                                </IconButton>
-                                <IconButton className={classes.button} aria-label="delete" onClick={() => this.handleRemove(key)}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </Grid>
-                        </Grid>
+                        // <Grid container alignItems="center"  >
+                        //     <Grid item xs={4}>{user.first_name} </Grid>
+                        //     <Grid item xs={4}>{user.last_name}</Grid>
+                        //     <Grid item xs={4}>
+                        //         <IconButton className={classes.button} aria-label="edit" onClick={() => this.handleEditShow(key, user)}>
+                        //             <EditIcon />
+                        //         </IconButton>
+                        //         <IconButton className={classes.button} aria-label="delete" onClick={() => this.handleRemove(key)}>
+                        //             <DeleteIcon />
+                        //         </IconButton>
+                        //     </Grid>
+                        // </Grid>
+                        <FullUserInfo 
+                            key={key}
+                            user={user}
+                            keyUser={key}
+                            handleRemove={this.handleRemove}
+                            handleEditShow={this.handleEditShow}
+                        />
                     ))}
                     {this.state.editOpen && <EditUser
                         open={this.state.editOpen}

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import Phone from '@material-ui/icons/Phone';
 import Email from '@material-ui/icons/Email';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 const Styles = (theme) => ({
     container: {
@@ -22,19 +24,47 @@ const Styles = (theme) => ({
         width: 60,
         height: 60,
     },
+    button: {
+        margin: theme.spacing(1),
+    },
+    input: {
+        display: 'none',
+    },
 });
 
 class FormUser extends Component {
+
+    state = {
+        src: null,
+    }
+
+   
 
     render() {
         const { classes, user } = this.props;
 
         return (
             <Grid container alignItems="center" spacing={4}>
-                <TextField type="file" onChange={(e)=>console.log('file', e.target.files)} ></TextField>
                 <Grid item xs={2}>
-                    
-                    <Avatar alt="Remy Sharp" src='' value={user.photo_user} className={classes.bigAvatar} />
+                    <TextField
+                        accept="image/*"
+                        className={classes.input}
+                        id="icon-button-file"
+                        name="photo_user"
+                        type="file"
+                        onChange={this.props.fileSelectedHendler}
+                    />
+                    <label htmlFor="icon-button-file">
+                        <IconButton
+                            color="primary"
+                            className={classes.button}
+                            aria-label="upload picture"
+                            component="span"
+                        >
+                            <PhotoCamera />
+                        </IconButton>
+                    </label>
+                    {/* <Avatar alt="Remy Sharp" src='' value={user.photo_user} className={classes.bigAvatar} /> */}
                 </Grid>
                 <Grid item xs={5}>
                     <TextField
@@ -66,6 +96,7 @@ class FormUser extends Component {
                         id="email"
                         label="email"
                         name="email"
+                        type="email"
                         className={classes.textField}
                         value={user.email}
                         onChange={this.props.handleChange}
@@ -106,4 +137,4 @@ class FormUser extends Component {
     }
 }
 
-export default (withStyles(Styles)(FormUser))
+export default (withStyles(Styles, { withTheme: true })(FormUser))

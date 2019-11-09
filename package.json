@@ -9,6 +9,7 @@
     "date-fns": "^2.0.0",
     "firebase": "^7.2.3",
     "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-draggable": "^4.1.0",

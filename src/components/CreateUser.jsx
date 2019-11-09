@@ -42,6 +42,18 @@ class CreateUser extends Component {
             .ref("/")
             .push(user);
     };
+    fileSelectedHendler = e => {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                let user = {...this.state.user}
+                user.photo_user = reader.result
+                this.setState({ user })
+            });
+            reader.readAsDataURL(e.target.files[0]);
+            console.log('reader', reader)
+        }
+    };
 
     render() {
         const { user } = this.state;
@@ -61,6 +73,7 @@ class CreateUser extends Component {
                     <FormUser
                         user={user}
                         handleChange={this.handleChange}
+                        fileSelectedHendler={this.fileSelectedHendler}
                     />
                 </DialogContent>
                 <DialogActions>
