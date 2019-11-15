@@ -38,10 +38,10 @@ class FormUser extends Component {
         src: null,
     }
 
-   
+
 
     render() {
-        const { classes, user } = this.props;
+        const { classes, user, error } = this.props;
 
         return (
             <Grid container alignItems="center" spacing={4}>
@@ -75,6 +75,8 @@ class FormUser extends Component {
                         value={user.first_name}
                         onChange={this.props.handleChange}
                         margin="normal"
+                        error={Boolean(error && error.first_name)}
+                        helperText={error && error.first_name}
                     />
                 </Grid>
                 <Grid item xs={5}>
@@ -86,6 +88,8 @@ class FormUser extends Component {
                         value={user.last_name}
                         onChange={this.props.handleChange}
                         margin="normal"
+                        error={Boolean(error && error.last_name)}
+                        helperText={error && error.last_name}
                     />
                 </Grid>
                 <Grid item xs={1}>
@@ -101,6 +105,8 @@ class FormUser extends Component {
                         value={user.email}
                         onChange={this.props.handleChange}
                         margin="normal"
+                        error={Boolean(error && error.email)}
+                        helperText={error && error.email}
                     />
                 </Grid>
                 <Grid item xs={1}>
@@ -129,6 +135,8 @@ class FormUser extends Component {
                         value={user.phone_number}
                         onChange={this.props.handleChange}
                         margin="normal"
+                        error={Boolean(error && error.phone_number)}
+                        helperText={error && error.phone_number}
                     />
                 </Grid>
             </Grid>
