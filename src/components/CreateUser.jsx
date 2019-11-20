@@ -41,7 +41,7 @@ class CreateUser extends Component {
                 error[event.target.name] = 'The phone number must consist of positive digits';
                 break;
             case 'email':
-                regular = RegExp('^\\w+@[a-zA-Z_.-]+?\\.[a-zA-Z_.-]{2,3}$');
+                regular = RegExp('^\\w+@[a-zA-Z0-9_.-]+?\\.[a-zA-Z_.-]{2,3}$');
                 error[event.target.name] = 'email not valid';
                 break;
             default:
