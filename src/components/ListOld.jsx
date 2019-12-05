@@ -9,7 +9,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 const Styles = theme => ({
     textField: {
         marginRight: 20,
-        listStyle: 'none'
     },
 });
 
@@ -79,53 +78,53 @@ class List extends Component {
     };
 
     render() {
-
         const { list } = this.state;
         const { classes } = this.props;
 
         return (
-            <div>
+            <MUIList style={{ marginRight: 10, marginTop: 10 }}>
                 {map(list, (item, i) => (
-                    <ul key={i}>
-                        <li
-                            className={classes.textField} >{item.value}
-                            {item.sublist ?
-                                <Button
-                                    // variant="outlined"
-                                    // color="primary"
-                                    onClick={() => this.handleRemoveSublist(i)}>Remove Sublist</Button>
-                                : <Button
-                                    // variant="outlined"
-                                    // color="primary"
-                                    onClick={() => this.handleAddSublist(item)}>Add Sublist</Button>
-                            }
-                            <Button
-                                // variant="outlined"
-                                // color="primary"
-                                onClick={() => this.handleRemove(item)}>Remove</Button>
-                            {item.sublist &&
-                                <List
-                                    list={item.sublist}
-                                    onChange={(childList) => {
-                                        let newList = [...list];
-                                        newList[i].sublist = childList;
-                                        this.setState({ list: newList })
-                                    }}
-                                    classes={classes}
-                                />
-                            }
-                        </li>
-                    </ul>
+                    <ListItem key={i}>
+                        <Typography 
+                            className={classes.textField} >{item.value}</Typography>
+                        {item.sublist ?
+                            <Button 
+                                variant="outlined" 
+                                color="primary" 
+                                onClick={() => this.handleRemoveSublist(i)}>Remove Sublist</Button>
+                            : <Button 
+                                variant="outlined" 
+                                color="primary" 
+                                onClick={() => this.handleAddSublist(item)}>Add Sublist</Button>
+                        }
+                        <Button 
+                            variant="outlined" 
+                            color="primary" 
+                            onClick={() => this.handleRemove(item)}>Remove</Button>
+                        {item.sublist &&
+                            <List
+                                list={item.sublist}
+                                onChange={(childList) => {
+                                    let newList = [...list];
+                                    newList[i].sublist = childList;
+                                    this.setState({ list: newList })
+                                }}
+                                classes={classes}
+                            />
+                        }
+                    </ListItem>
                 ))}
-                <TextField
-                    className={classes.textField}
-                    type="text" value={this.state.input}
+                <TextField 
+                    className={classes.textField} 
+                    type="text" value={this.state.input} 
                     onChange={this.handleInput} />
-                <Button
-                    // variant="outlined"
-                    // color="primary"
+                <Button 
+                    variant="outlined" 
+                    color="primary" 
                     onClick={this.handleAddItem}>Add</Button>
-            </div>)
+            </MUIList>
+        );
+
     }
 }
 
