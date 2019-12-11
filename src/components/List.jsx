@@ -109,7 +109,7 @@ class List extends Component {
         return (
             <div>
                 {map(list, (item, i) => (
-                    <ul key={i}>
+                    <ul key={i} className={`${classes.top}`}>
                         <li
                             className={classes.textField}
                         >
@@ -174,7 +174,7 @@ class List extends Component {
                     </ul>
                 ))}
                 <TextField
-                    className={classes.textField}
+                    className={`${classes.textField} ${classes.top}`}
                     type="text" value={this.state.input}
                     onChange={this.handleInput}
                 />
@@ -184,6 +184,7 @@ class List extends Component {
                     variant='contained'
                     size='small'
                     color='secondary'
+                    className ={classes.top}
                 >
                     Add
                 </Button>
