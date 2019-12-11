@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import map from 'lodash/map';
 import forEach from 'lodash/forEach';
 import filter from 'lodash/filter';
-import { Typography, Button, TextField, ListItem } from '@material-ui/core';
-import MUIList from '@material-ui/core/List';
+import { Button, TextField } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 const Styles = theme => ({
@@ -91,17 +90,11 @@ class List extends Component {
                             className={classes.textField} >{item.value}
                             {item.sublist ?
                                 <Button
-                                    // variant="outlined"
-                                    // color="primary"
                                     onClick={() => this.handleRemoveSublist(i)}>Remove Sublist</Button>
                                 : <Button
-                                    // variant="outlined"
-                                    // color="primary"
                                     onClick={() => this.handleAddSublist(item)}>Add Sublist</Button>
                             }
                             <Button
-                                // variant="outlined"
-                                // color="primary"
                                 onClick={() => this.handleRemove(item)}>Remove</Button>
                             {item.sublist &&
                                 <List
@@ -122,8 +115,6 @@ class List extends Component {
                     type="text" value={this.state.input}
                     onChange={this.handleInput} />
                 <Button
-                    // variant="outlined"
-                    // color="primary"
                     onClick={this.handleAddItem}>Add</Button>
             </div>)
     }
