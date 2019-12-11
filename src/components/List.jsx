@@ -4,12 +4,27 @@ import forEach from 'lodash/forEach';
 import filter from 'lodash/filter';
 import { Button, TextField } from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
 
 const Styles = theme => ({
     textField: {
         marginRight: 20,
         listStyle: 'none'
     },
+    text: {
+        marginRight: 20
+    },
+    btn: {
+        marginRight: 10
+    },
+    top: {
+        marginTop: 10
+    },
+    botton:{
+        marginBottom:10
+    }
+
 });
 
 class List extends Component {
@@ -76,7 +91,16 @@ class List extends Component {
             this.props.onChange(list);
         }
     };
-
+    handleMove = (index, moveToIndex) => {
+        let list = [...this.state.list];
+        let a = list[index]
+        list[index] = list[moveToIndex]
+        list[moveToIndex] = a;
+        this.setState({ list })
+        if (this.props.onChange) {
+            this.props.onChange(list);
+        }
+    }
     render() {
 
         const { list } = this.state;
@@ -87,15 +111,53 @@ class List extends Component {
                 {map(list, (item, i) => (
                     <ul key={i}>
                         <li
-                            className={classes.textField} >{item.value}
+                            className={classes.textField}
+                        >
+                            <span className={classes.text}>{item.value}</span>
                             {item.sublist ?
                                 <Button
-                                    onClick={() => this.handleRemoveSublist(i)}>Remove Sublist</Button>
+                                    onClick={() => this.handleRemoveSublist(i)}
+                                    variant='contained'
+                                    className={classes.btn}
+                                    size='small'
+                                >
+                                    Remove Sublist
+                                </Button>
                                 : <Button
-                                    onClick={() => this.handleAddSublist(item)}>Add Sublist</Button>
+                                    onClick={() => this.handleAddSublist(item)}
+                                    variant='outlined'
+                                    className={classes.btn}
+                                    size='small'
+                                >
+                                    Add Sublist
+                                    </Button>
                             }
                             <Button
-                                onClick={() => this.handleRemove(item)}>Remove</Button>
+                                onClick={() => this.handleRemove(item)}
+                                variant='contained'
+                                className={classes.btn}
+                                size='small'
+                            >
+                                Remove
+                            </Button>
+                            {i > 0 &&
+                                <Button
+                                    onClick={() => this.handleMove(i, i - 1)}
+                                    variant='outlined'
+                                    className={classes.btn}
+                                    size='small'
+                                >
+                                    <ArrowUpward />
+                                </Button>}
+                            {i < list.length - 1 &&
+                                <Button
+                                    onClick={() => this.handleMove(i, i + 1)}
+                                    variant='outlined'
+                                    className={classes.btn}
+                                    size='small'
+                                >
+                                    <ArrowDownward />
+                                </Button>}
                             {item.sublist &&
                                 <List
                                     list={item.sublist}
@@ -107,15 +169,24 @@ class List extends Component {
                                     classes={classes}
                                 />
                             }
+
                         </li>
                     </ul>
                 ))}
                 <TextField
                     className={classes.textField}
                     type="text" value={this.state.input}
-                    onChange={this.handleInput} />
+                    onChange={this.handleInput}
+                />
+
                 <Button
-                    onClick={this.handleAddItem}>Add</Button>
+                    onClick={this.handleAddItem}
+                    variant='contained'
+                    size='small'
+                    color='secondary'
+                >
+                    Add
+                </Button>
             </div>)
     }
 }
